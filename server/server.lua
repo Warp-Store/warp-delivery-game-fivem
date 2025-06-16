@@ -102,7 +102,7 @@ function _CMR:ParseMessage(Message, Args)
 end
 
 function _CMR:Init()
-    local Result, StatusCode = self:Request("init", "POST", {["serverPort"] = Config.Warp.ServerPort})
+    local Result, StatusCode = self:Request("init", "POST", {["serverPort"] = parseInt(GetConvar("sv_port", "30120"))})
 
     if StatusCode ~= 200 then
         self:ConsoleMessage("O Token inserido está inválido, verifique e tente novamente!", true, self.Colors.Red)

@@ -21,6 +21,7 @@ Config.Warp = {
     Token = "Seu Token", -- Pegue seu token em https://warpstore.app/dashboard/integration
     Interval = 1, -- Tempo em minutos que irá verificar se existe uma nova compra
     -- Todas as notificações a baixo só aparecem caso ser entrega, não reembolso e nem remoção do produto.
+    ServerPort = 30120,
     Interface = {
         Enable = true,
         Ballons = true,

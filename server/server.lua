@@ -102,7 +102,7 @@ function _CMR:ParseMessage(Message, Args)
 end
 
 function _CMR:Init()
-    local Result, StatusCode = self:Request("init", "POST", {["serverPort"] = 30120})
+    local Result, StatusCode = self:Request("init", "POST", {["serverPort"] = Config.Warp.ServerPort})
 
     if StatusCode ~= 200 then
         self:ConsoleMessage("O Token inserido está inválido, verifique e tente novamente!", true, self.Colors.Red)
@@ -188,9 +188,6 @@ function _CMR:CommandsQueue()
     end
 end
 
--- local Proxy = module("vrp", "lib/Proxy")
--- local vRP = Proxy.getInterface("vRP")
--- print(vRP.getUserSource(parseInt(2)), 'teste')
 
 function _CMR:DeliveryCommand(CommandName, Passport, Args)
     if not Commands[CommandName] then

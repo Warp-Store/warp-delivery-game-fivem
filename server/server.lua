@@ -58,15 +58,15 @@ function _CMR:Request(Path, Method, Payload)
         ["Authorization"] = "Bearer "..Config.Warp.Token,
         ["Content-Type"] = "application/json"
     }
-
+    
     PerformHttpRequest(self.Endpoint..Path, function(ResultStatusCode, ResultData, _, ErrorData)
         StatusCode = ResultStatusCode
-
+        
         if ResultStatusCode >= 200 and ResultStatusCode <= 300 then
-           Result = json.decode(ResultData)
-           return
+            Result = json.decode(ResultData)
+            return
         end
-
+        
         Result = ErrorData
     end, Method, Payload and json.encode(Payload) or nil, Headers)
 
@@ -104,7 +104,7 @@ end
 function _CMR:Init()
     local Result, StatusCode = self:Request("init", "POST", {["serverPort"] = parseInt(GetConvar("sv_port", "30120"))})
 
-    if StatusCode ~= 200 then
+    if StatusCode >= 300 then
         self:ConsoleMessage("O Token inserido está inválido, verifique e tente novamente!", true, self.Colors.Red)
         return
     end

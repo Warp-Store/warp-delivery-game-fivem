@@ -129,7 +129,7 @@ end
 function _CMR:CommandsQueue()
     local Result, StatusCode = self:Request("commands/pending-commands", "GET")
 
-    if StatusCode ~= 200 then
+    if StatusCode > 300 then
         self:ConsoleMessage("Erro ao tentar obter os comandos pedentes!", true, self.Colors.Red)
         return
     end
@@ -162,7 +162,7 @@ function _CMR:CommandsQueue()
 
                     local _, StatusCode = self:Request("commands/mark-as-processed", "POST", {["commandQueueId"] = Values.id})
 
-                    if StatusCode ~= 200 then
+                    if StatusCode > 300 then
                         self:ConsoleMessage("Falha ao atualizar o pedido | Pagamento ID: "..Values.checkoutId, false, self.Colors.Red)
                         return
                     end
